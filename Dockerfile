@@ -34,7 +34,7 @@ RUN git checkout c78752606ed2d27df26ed767a1d6f0b55be0359e
 #RUN make
 #WORKDIR /go/src/github.com/intelsdi-x/snap/
 RUN scripts/deps.sh \
-    && make
+    && make \
     && mkdir /opt/snap \ 
     && mv /go/src/github.com/intelsdi-x/snap/build/* /opt/snap/ \
     && mv /go/src/github.com/intelsdi-x/snap-plugin-collector-docker/build/rootfs/snap-plugin-collector-docker /opt/snap/plugin/ 
