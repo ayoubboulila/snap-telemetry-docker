@@ -34,6 +34,7 @@ RUN apt-get update && \
     mkdir /opt/snap && \
     mv /go/src/github.com/intelsdi-x/snap/build/* /opt/snap/ && \
     mv /go/src/github.com/intelsdi-x/snap-plugin-collector-docker/build/rootfs/snap-plugin-collector-docker /opt/snap/plugin/ && \
+    rm -rf /go/src/github.com/intelsdi-x/ && \ 
     apt-get clean autoclean && \
     apt-get autoremove
 
