@@ -10,7 +10,7 @@ FROM golang:latest
 MAINTAINER Ayoub Boulila <ayoubboulila@gmail.com>
 
 ENV GOPATH=$GOPATH:/app SNAP_PATH=/go/src/github.com/intelsdi-x/snap/build \
-    TRUST=0 TRIBEPORT=6001 APIPORT=8181 SEEDIP=127.0.0.1 SEEDPORT=6000
+    TRUST=0 TRIBEPORT=6001 APIPORT=8181 SEEDIP=127.0.0.1 SEEDPORT=6000 TRIBEADDR=127.0.0.1
 
 WORKDIR /go/src/github.com/intelsdi-x/
 
