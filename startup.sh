@@ -9,7 +9,7 @@
 ################################################
 
 run(){
-bash /opt/snap/bin/snapd --tribe -t $TRUST --tribe-port $TRIBEPORT --api-port $APIPORT --tribe-node-name $HOST --tribe-seed $SEEDIP:SEEDPORT
+bash /opt/snap/bin/snapd --tribe -t $TRUST --tribe-port $TRIBEPORT --api-port $APIPORT --tribe-node-name $HOST --tribe-seed $SEEDIP:$SEEDPORT
 
 
 
