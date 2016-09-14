@@ -49,5 +49,5 @@ EXPOSE 8181 6001 6000
 # EXEC
 
 #ENTRYPOINT ["/opt/snap/bin/snapd", "--api-port", "8181", "--log-level", "1", "-t", "0" ]
-CMD "run"
+CMD ["run"]
 ENTRYPOINT ["/opt/snap/startup.sh"]
