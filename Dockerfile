@@ -41,7 +41,7 @@ ADD ./startup.sh /opt/snap/startup.sh
 ENV PATH $PATH:/opt/snap/bin
 
 # Ports
-EXPOSE 8181
+EXPOSE 8181 6001 6000
 
 
 
