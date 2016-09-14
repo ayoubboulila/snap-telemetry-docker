@@ -38,6 +38,7 @@ RUN apt-get update && \
     apt-get clean autoclean && \
     apt-get autoremove
 ADD ./startup.sh /opt/snap/startup.sh
+RUN RUN chmod +x /opt/snap/startup.sh
 ENV PATH $PATH:/opt/snap/bin
 
 # Ports
