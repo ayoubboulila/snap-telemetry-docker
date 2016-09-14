@@ -9,8 +9,9 @@ FROM golang:latest
 
 MAINTAINER Ayoub Boulila <ayoubboulila@gmail.com>
 
-ENV GOPATH=$GOPATH:/app
-ENV SNAP_PATH=/go/src/github.com/intelsdi-x/snap/build
+ENV GOPATH=$GOPATH:/app SNAP_PATH=/go/src/github.com/intelsdi-x/snap/build \
+    TRUST=0 TRIBEPORT=6001 APIPORT=8181 SEEDIP=127.0.0.1 SEEDPORT=6000
+
 WORKDIR /go/src/github.com/intelsdi-x/
 
 RUN apt-get update && \
@@ -36,7 +37,7 @@ RUN apt-get update && \
     mv /go/src/github.com/intelsdi-x/snap-plugin-collector-docker/build/rootfs/snap-plugin-collector-docker /opt/snap/plugin/ && \
     apt-get clean autoclean && \
     apt-get autoremove
-
+ADD ./startup.sh /opt/snap/startup.sh
 ENV PATH $PATH:/opt/snap/bin
 
 # Ports
@@ -47,4 +48,6 @@ EXPOSE 8181
 
 # EXEC
 
-ENTRYPOINT ["/opt/snap/bin/snapd", "--api-port", "8181", "--log-level", "1", "-t", "0" ]
+#ENTRYPOINT ["/opt/snap/bin/snapd", "--api-port", "8181", "--log-level", "1", "-t", "0" ]
+CMD "run"
+ENTRYPOINT ["/opt/snap/startup.sh"]
