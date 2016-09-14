@@ -15,7 +15,7 @@ then
 echo "AYB [debug]: starting tribe master node"
 snapd --tribe -t $TRUST --api-port $APIPORT --tribe-node-name $HOST
 
-else if [ mode -eq "member" ] 
+elif [ mode -eq "member" ] 
 then
 echo "AYB [debug]: starting member node"
 snapd --tribe -t $TRUST --tribe-port $TRIBEPORT --tribe-addr $TRIBEADDR --api-port $APIPORT --tribe-node-name $HOST --tribe-seed $SEEDIP:$SEEDPORT
