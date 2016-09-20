@@ -13,15 +13,18 @@ ENV GOPATH=$GOPATH:/app SNAP_PATH=/opt/snap PATH=$PATH:/opt/snap/bin
 
 WORKDIR /home
 ADD resources/bin.zip /home/resources/bin.zip
-ADD resources/bin.zip /home/resources/plugin1.zip
-ADD resources/bin.zip /home/resources/plugin2.zip
+ADD resources/plugin1.zip /home/resources/plugin.zip.001
+ADD resources/plugin2.zip /home/resources/plugin.zip.002
 
-RUN unzip /home/resources/bin.zip && \
-    mv /home/resources/snap /opt/ && \
-    unzip /home/resources/plugin1.zip && \
-    unzip /home/resources/plugin2.zip && \
+RUN apt-get update && apt-get install unzip && apt-get clean autoclean && apt-get autoremove && unzip /home/resources/bin.zip -d /opt && \
+    cat /home/resources/plugin.zip* > /home/resources/plugin.zip && \
+    unzip /home/resources/plugin.zip -d /home/resources/ && \
     mv /home/resources/plugin/snap-plugin-collector-docker /opt/snap/plugin/ && \
-    mv /home/resources/plugin/snap-plugin-publisher-influxdb /opt/snap/plugin/
+    mv /home/resources/plugin/snap-plugin-publisher-influxdb /opt/snap/plugin/ && \
+    rm /home/resources/bin.zip && \
+    rm /home/resources/plugin.zip.001 && \
+    rm /home/resources/plugin.zip.002 && \
+    rm /home/resources/plugin.zip
 
 ADD startup.sh /opt/snap/starup.sh
 
