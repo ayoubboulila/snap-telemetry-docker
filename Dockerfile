@@ -21,7 +21,7 @@ RUN tar -xzvf /home/resources/bin.zip && \
     tar -xzvf /home/resources/plugin1.zip && \
     tar -xzvf /home/resources/plugin2.zip && \
     mv /home/resources/plugin/snap-plugin-collector-docker /opt/snap/plugin/ && \
-    mv /home/resources/plugin/snap-plugin-publisher-influxdb /opt/snap/plugin/ && \
+    mv /home/resources/plugin/snap-plugin-publisher-influxdb /opt/snap/plugin/
 
 ADD startup.sh /opt/snap/starup.sh
 
