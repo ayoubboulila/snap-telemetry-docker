@@ -16,10 +16,10 @@ ADD resources/bin.zip /home/resources/bin.zip
 ADD resources/bin.zip /home/resources/plugin1.zip
 ADD resources/bin.zip /home/resources/plugin2.zip
 
-RUN tar -xzvf /home/resources/bin.zip && \
+RUN unzip /home/resources/bin.zip && \
     mv /home/resources/snap /opt/ && \
-    tar -xzvf /home/resources/plugin1.zip && \
-    tar -xzvf /home/resources/plugin2.zip && \
+    unzip /home/resources/plugin1.zip && \
+    unzip /home/resources/plugin2.zip && \
     mv /home/resources/plugin/snap-plugin-collector-docker /opt/snap/plugin/ && \
     mv /home/resources/plugin/snap-plugin-publisher-influxdb /opt/snap/plugin/
 
