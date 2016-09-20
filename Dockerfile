@@ -9,43 +9,28 @@ FROM golang:latest
 
 MAINTAINER Ayoub Boulila <ayoubboulila@gmail.com>
 
-ENV GOPATH=$GOPATH:/app
-ENV SNAP_PATH=/go/src/github.com/intelsdi-x/snap/build
-WORKDIR /go/src/github.com/intelsdi-x/
+ENV GOPATH=$GOPATH:/app SNAP_PATH=/opt/snap PATH=$PATH:/opt/snap/bin
 
-RUN apt-get update && \
-    apt-get -y install facter && \
-    apt-get -y install nano && \
-    go get github.com/tools/godep && \
-    go get golang.org/x/tools/cmd/goimports && \
-    go get golang.org/x/tools/cmd/cover && \
-    go get github.com/smartystreets/goconvey && \
-    cd /go/src/github.com/intelsdi-x/ && \
-    git clone https://github.com/intelsdi-x/gomit.git && \
-    git clone https://github.com/intelsdi-x/snap-plugin-collector-docker.git && \
-    cd /go/src/github.com/intelsdi-x/snap-plugin-collector-docker && \
-    git checkout 615d4260b824f326b273e60c6b4270d34c3445d4 && \
-    make && \
-    git clone https://github.com/intelsdi-x/snap.git && \
-    cd /go/src/github.com/intelsdi-x/snap/ && \
-    git checkout c78752606ed2d27df26ed767a1d6f0b55be0359e && \
-    scripts/deps.sh && \
-    make && \
-    mkdir /opt/snap && \
-    mv /go/src/github.com/intelsdi-x/snap/build/* /opt/snap/ && \
-    mv /go/src/github.com/intelsdi-x/snap-plugin-collector-docker/build/rootfs/snap-plugin-collector-docker /opt/snap/plugin/ && \
-    rm -rf /go/src/github.com/intelsdi-x/ && \ 
-    apt-get clean autoclean && \
-    apt-get autoremove
+WORKDIR /home
+ADD resources/bin.zip /home/resources/bin.zip
+ADD resources/bin.zip /home/resources/plugin1.zip
+ADD resources/bin.zip /home/resources/plugin2.zip
 
-ENV PATH $PATH:/opt/snap/bin
+RUN tar -xzvf /home/resources/bin.zip && \
+    mv /home/resources/snap /opt/ && \
+    tar -xzvf /home/resources/plugin1.zip && \
+    tar -xzvf /home/resources/plugin2.zip && \
+    mv /home/resources/plugin/snap-plugin-collector-docker /opt/snap/plugin/ && \
+    mv /home/resources/plugin/snap-plugin-publisher-influxdb /opt/snap/plugin/ && \
+
+ADD startup.sh /opt/snap/starup.sh
 
 # Ports
-EXPOSE 8181
+EXPOSE 8181 6000 6001
 
 
 
 
 # EXEC
-
-ENTRYPOINT ["/opt/snap/bin/snapd", "--api-port", "8181", "--log-level", "1", "-t", "0" ]
+CMD ["run"]
+ENTRYPOINT ["/opt/snap/startup.sh"]
