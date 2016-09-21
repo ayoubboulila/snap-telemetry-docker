@@ -9,7 +9,7 @@ FROM golang:latest
 
 MAINTAINER Ayoub Boulila <ayoubboulila@gmail.com>
 
-ENV GOPATH=$GOPATH:/app SNAP_PATH=/opt/snap PATH=$PATH:/opt/snap/bin \
+ENV GOPATH=$GOPATH:/app SNAP_PATH=/opt/snap \
     TRUST=0 TRIBEPORT=6001 APIPORT=8181 SEEDIP=127.0.0.1 SEEDPORT=6000 TRIBEADDR=127.0.0.1
 
 WORKDIR /home
@@ -34,7 +34,7 @@ RUN chmod +x /opt/snap/startup.sh
 EXPOSE 8181 6000 6001
 
 
-
+ENV PATH=$PATH:/opt/snap/bin
 USER root
 # EXEC
 CMD ["run"]
