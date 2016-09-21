@@ -27,6 +27,7 @@ RUN apt-get update && apt-get install unzip && apt-get clean autoclean && apt-ge
     rm /home/resources/plugin2.zip
 
 ADD ./startup.sh /opt/snap/startup.sh
+RUN chmod -R 777 /opt/snap/startup.sh
 RUN chmod +x /opt/snap/startup.sh
 
 # Ports
@@ -34,7 +35,7 @@ EXPOSE 8181 6000 6001
 
 
 
-
+USER root
 # EXEC
 CMD ["run"]
 ENTRYPOINT ["/opt/snap/startup.sh"]
