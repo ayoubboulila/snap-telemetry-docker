@@ -26,7 +26,7 @@ RUN apt-get update && apt-get install unzip && apt-get clean autoclean && apt-ge
     rm /home/resources/plugin1.zip && \
     rm /home/resources/plugin2.zip
 
-ADD startup.sh /opt/snap/starup.sh
+ADD ./startup.sh /opt/snap/startup.sh
 RUN chmod +x /opt/snap/startup.sh
 
 # Ports
