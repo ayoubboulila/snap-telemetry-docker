@@ -13,12 +13,12 @@ run(){
 if [ "${MODE}" == "master" ] 
 then
 echo "AYB [debug]: starting tribe master node"
-snapd --tribe -t $TRUST --api-port $APIPORT --tribe-node-name $HOST
+sudo snapd --tribe -t $TRUST --api-port $APIPORT --tribe-node-name $HOST
 
 elif [ "${MODE}" == "member" ] 
 then
 echo "AYB [debug]: starting member node"
-snapd --tribe -t $TRUST --tribe-port $TRIBEPORT --tribe-addr $TRIBEADDR --api-port $APIPORT --tribe-node-name $HOST --tribe-seed $SEEDIP:$SEEDPORT
+sudo snapd --tribe -t $TRUST --tribe-port $TRIBEPORT --tribe-addr $TRIBEADDR --api-port $APIPORT --tribe-node-name $HOST --tribe-seed $SEEDIP:$SEEDPORT
 
 fi
 }
