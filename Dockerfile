@@ -9,7 +9,8 @@ FROM golang:latest
 
 MAINTAINER Ayoub Boulila <ayoubboulila@gmail.com>
 
-ENV GOPATH=$GOPATH:/app SNAP_PATH=/opt/snap PATH=$PATH:/opt/snap/bin
+ENV GOPATH=$GOPATH:/app SNAP_PATH=/opt/snap PATH=$PATH:/opt/snap/bin \
+    TRUST=0 TRIBEPORT=6001 APIPORT=8181 SEEDIP=127.0.0.1 SEEDPORT=6000 TRIBEADDR=127.0.0.1
 
 WORKDIR /home
 ADD resources/bin.zip /home/resources/bin.zip
@@ -26,6 +27,7 @@ RUN apt-get update && apt-get install unzip && apt-get clean autoclean && apt-ge
     rm /home/resources/plugin2.zip
 
 ADD startup.sh /opt/snap/starup.sh
+RUN chmod +x /opt/snap/startup.sh
 
 # Ports
 EXPOSE 8181 6000 6001
